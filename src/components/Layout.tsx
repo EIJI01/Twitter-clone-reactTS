@@ -1,3 +1,4 @@
+import FollowBar from "./layout/FollowBar";
 import Sidebar from "./layout/Sidebar";
 interface LayoutProps {
   children: React.ReactNode;
@@ -11,6 +12,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <div className="col-span-2 lg:col-span-2 border-x-[1px] border-neutral-800 ">
             <div>{children}</div>
           </div>
+          <FollowBar />
         </div>
       </div>
     </div>
