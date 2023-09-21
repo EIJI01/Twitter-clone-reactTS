@@ -4,6 +4,8 @@ import Input from "../Input";
 import Modal from "../layout/Modal";
 import useRegisterModal from "@/hooks/useRegisterModal";
 import { BsTwitter } from "react-icons/bs";
+import { signIn } from "next-auth/react";
+
 const LoginModal = () => {
   const loginModel = useLoginModal();
   const registerModal = useRegisterModal();
@@ -22,6 +24,10 @@ const LoginModal = () => {
     try {
       setIsLoading(true);
       //TODO ADD LOG IN
+      await signIn("credentials", {
+        email,
+        password,
+      });
 
       loginModel.onClose();
     } catch (err) {
@@ -29,7 +35,7 @@ const LoginModal = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [loginModel]);
+  }, [loginModel, email, password]);
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
@@ -41,6 +47,7 @@ const LoginModal = () => {
       />
       <Input
         placeholder="Password"
+        type="password"
         onChange={(e) => setPassword(e.target.value)}
         value={password}
         disabled={isLoading}
